@@ -1,0 +1,21 @@
+
+.user-root {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 5% 10%;
+}
+
+.user-card-root {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: row;
+    margin-right: 25px;
+    border: 1px solid red;
+    padding: 25px;
+    margin: 1%;
+}
