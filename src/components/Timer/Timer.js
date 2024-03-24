@@ -25,6 +25,7 @@ const Timer = (props) => {
     const interval = setInterval(() => getTime(deadline), 0);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const Timer = (props) => {
     const currDays = Date.now() / (1000 * 60 * 60 * 24);
     const passedDays = currDays - prevDays;
     setDaysPassed(passedDays.toFixed().split(".")[0]);
-  },[])
+  }, [startDate]);
 
   const appendData = (currentMinutes) => {
     if (currentMinutes < 10) {
@@ -48,7 +49,7 @@ const Timer = (props) => {
         <h4 className="timer-card-value">{value}</h4>
       </div>
     );
-  }
+  };
 
   return (
     <div className="root-x">
@@ -56,7 +57,9 @@ const Timer = (props) => {
       <div className="timer-root">
         <div className="timer-container">
           <div className="timer-cards-root">
-            <div style={{color: "red"}}>{comp("Passed Days", appendData(daysPassed))}</div>
+            <div style={{ color: "red" }}>
+              {comp("Passed Days", appendData(daysPassed))}
+            </div>
             {comp("Days", appendData(days))}
             {comp("Hours", appendData(hours))}
             {comp("Minutes", appendData(minutes))}
