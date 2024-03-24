@@ -2,14 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./Timer.css";
 
-const Timer = () => {
+const Timer = (props) => {
+  const { startDate, deadline, message } = props;
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [milliSeconds, setMilliSeconds] = useState(0);
-
-  const deadline = "May, 15, 2024";
+  const [daysPassed, setDaysPassed] = useState("");
 
   const getTime = () => {
     const time = Date.parse(deadline) - Date.now();
@@ -26,6 +26,13 @@ const Timer = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const prevDays = Date.parse(startDate) / (1000 * 60 * 60 * 24);
+    const currDays = Date.now() / (1000 * 60 * 60 * 24);
+    const passedDays = currDays - prevDays;
+    setDaysPassed(passedDays.toFixed().split(".")[0]);
+  },[])
 
   const appendData = (currentMinutes) => {
     if (currentMinutes < 10) {
@@ -45,11 +52,11 @@ const Timer = () => {
 
   return (
     <div className="root-x">
-      <h2 className="timer-heading">{`The Goal Deadline Date is: 15th May 2024`}
-      </h2>
+      <h2 className="timer-heading">{message}</h2>
       <div className="timer-root">
         <div className="timer-container">
           <div className="timer-cards-root">
+            <div style={{color: "red"}}>{comp("Passed Days", appendData(daysPassed))}</div>
             {comp("Days", appendData(days))}
             {comp("Hours", appendData(hours))}
             {comp("Minutes", appendData(minutes))}

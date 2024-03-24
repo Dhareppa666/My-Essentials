@@ -1,12 +1,12 @@
 import React from 'react';
-import Timer from './components/Timer/Timer';
+import Timers from './components/Timers/Timers';
 // import { ServerFetch } from './components/DynamicList/ServerFetch';
 
 const App = () => {
 
   return (
     <div>
-      <Timer />
+      <Timers />
       {/* <ServerFetch /> */}
     </div>
   );
